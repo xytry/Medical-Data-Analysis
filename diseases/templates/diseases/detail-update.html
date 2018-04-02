@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block head_title %} {{form.instance.name}} | Diseases | {{block.super}}{% endblock head_title %}
+
+{% block content %}
+<h1>{{ form.instance.name }}</h1>
+
+<ul>
+
+        <li> {{ form.instance.age }} {{ form.instance.gender }} {{ form.instance.Ethnicity }} {{ form.instance.smoker }} {{ form.instance.fever }} {{form.instance.public}} {{form.instance.timestamp}} {{form.instance.updated}}</li>
+
+</ul>
+
+<h3>Make Changes</h3>
+{% include 'snippet/form-snippet.html' with form=form %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block head_title %}Patients | {{block.super}}{% endblock head_title %}
+
+{% block content %}
+<h1>Patients List <small><a href='{% url "patients:create" %}'>Add</a></small></h1>
+
+<ul>
+    {% for obj in object_list %}
+    {#  <li><a href='{{ obj.get_absolute_url }}'>{{ obj }}</a><br/>  #}
+    {# <li><a href='{% url "patients-detail" slug=obj.slug %}'>{{ obj }}</a><br/> #}
+    <li><a href='{% url "patients:detail" slug=obj.slug %}'>{{ obj }}</a><br/>
+        {#  <a href="/patients/{{ obj.slug }}/">{{ obj }}</a><br/>  #}
+        {#  {{ obj.name }} {{obj.age}} {{obj.gender}} {{obj.timestamp}} {{obj.updated}}</li>  #}
+        Name: {{ obj.name }} Age: {{obj.age}} Gender: {{ obj.gender }}, Creat Time: {{obj.timestamp}} Update Time: {{obj.updated}}</li>
+    {% empty %}
+    <li><a href='{% url "patients:create" %}'>Add One</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

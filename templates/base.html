@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+    <title>{% block head_title %}Data Anlysis in Medical Domain{% endblock head_title %}</title>
+    {% include 'snippet/css.html' %}
+</head>
+<body>
+    {% include 'snippet/nav.html' %}
+
+    <div class="container">
+        {% block content %}{% endblock content %}
+    </div>
+
+    {% include 'snippet/js.html' %}
+</body>
+</html>

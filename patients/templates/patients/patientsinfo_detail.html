@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block head_title %}Patients | {{block.super}}{% endblock head_title %}
+
+{% block content %}
+<h1>{{ object.title }}<small>{{ object.age }}</small></h1>
+<p>{{obj.gender}}</p>
+<p>{{ object.timestamp }}, {{ object.updated|timesince }} ago</p>
+
+{% endblock %}

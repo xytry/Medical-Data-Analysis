@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block head_title %}Welcome | {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+<h2 style="margin-bottom: 30px;"><style>
+body {background-color: powderblue;}
+h2 {color:blue;}
+h3 {color:red;}
+</style>Patient Name: {{ queryset }} </h2>
+<p><h3 style="margin-bottom: 10px;">Prediction Result: {{ output }}</h3></p>
+<div class='row'>
+    <div class="col-sm-12">
+        <div class="thumbnail">
+            <h3 style="margin-bottom: 20px;">Diagnosis Aid System:</h3>
+            {% if message1 == 1 %}<li  style="margin-left: 25px">Patient May Suffer from Laceration</li>{% endif %}
+            {% if message2 == 1 %}<li  style="margin-left: 25px">Patient's condition may worsen and recommend to have a caregiver</li>{% endif %}
+        </div>
+    </div>
+</div>
+
+<h4 style="margin-bottom: 20px;"><b>Detailed Information of Patient</b></h4>
+<p><b>Age:</b> <span class="badge badge-default">{{ qs_age }}</span> (Actual age is: age*(101-16)+16) </p>
+<p><b>Gender:</b> <span class="badge badge-default">{{ qs_gender }}</span> (0=Male, 1=Female)</p>
+<p><b>Initial Shift:</b> <span class="badge badge-default">{{ qs_initial_shift }}</span> (0=AM, 0.5=PM, 1=Night)</p>
+<p><b>Initial Primary Doctor:</b> <span class="badge badge-default">{{ qs_initial_primary_doctor }}</span> (0=HO&MO, 0.5=Locum&GP, 1=Registrar)</p>
+<p><b>Initial Secondary Doctor:</b> <span class="badge badge-default">{{ qs_initial_secondary_doctor }}</span> (0=Have, 1=Does not have)</p>
+<p><b>Admitted:</b> <span class="badge badge-default">{{ qs_initial_admitted }}</span> (0=No, 1=Yes)</p>
+<p><b>Admitted to EDTU:</b> <span class="badge badge-default">{{ qs_initial_admitted_to_edtu }}</span> (0=No, 1=Yes)</p>
+<p><b>Discharged:</b> <span class="badge badge-default">{{ qs_initial_discharged }}</span> (0=No, 1=Yes)</p>
+<p><b>Follow up Initial Visit:</b> <span class="badge badge-default">{{ qs_follow_up_initial_visit }}</span> (0=No, 1=Yes)</p>
+<p><b>Initial at Own Risk Discharges:</b> <span class="badge badge-default">{{ qs_initial_at_own_risk_discharges }}</span> (0=No, 1=Yes)</p>
+<p><b>Activities of Daily Living:</b> <span class="badge badge-default">{{ qs_activities_of_daily_living }}</span> (0=Independent, 0.5=Assisted, 1=Dependent)</p>
+<p><b>Mobility:</b> <span class="badge badge-default">{{ qs_mobility }}</span> (0=Independent, 1/3=Ambulant with Assistance, 2/3=Wheelchair, 1=Bedbound)</p>
+<p><b>Caregiver:</b> <span class="badge badge-default">{{ qs_caregiver }}</span> (0=Does not have, 1=have)</p>
+<p><b>Diabetes Mellitus:</b> <span class="badge badge-default">{{ qs_diabetes_mellitus }}</span> (0=No, 1=Yes)</p>
+<p><b>Diabetes Meliitus End Organ Damage:</b> <span class="badge badge-default">{{ qs_diabetes_mellitus_end_organ_damage }}</span> (0=No, 1=Yes)</p>
+<p><b>Peripheral Vascular Disease:</b> <span class="badge badge-default">{{ qs_peripheral_vascular_disease }}</span> (0=No, 1=Yes)</p>
+<p><b>Congestive Heart Failure:</b> <span class="badge badge-default">{{ qs_congestive_heart_failure }}</span> (0=No, 1=Yes)</p>
+<p><b>Chronic Obstructive Pulmonary Disease:</b> <span class="badge badge-default">{{ qs_chronic_obstructive_pulmonary_disease }}</span> (0=No, 1=Yes)</p>
+<p><b>Acute Myocardial Infarction:</b> <span class="badge badge-default">{{ qs_acute_myocardial_infarction }}</span> (0=No, 1=Yes)</p>
+<p><b>Transient Ischemic Attack:</b> <span class="badge badge-default">{{ qs_transient_ischemic_attack }}</span> (0=No, 1=Yes)</p>
+<p><b>Renal Disease:</b> <span class="badge badge-default">{{ qs_renal_disease }}</span> (0=No, 1=Yes)</p>
+<p><b>Nonmetastatic Cancer:</b> <span class="badge badge-default">{{ qs_nonmetastatic_cancer }}</span> (0=No, 1=Yes)</p>
+<p><b>Metastatic Cancer:</b> <span class="badge badge-default">{{ qs_metastatic_cancer }}</span> (0=No, 1=Yes)</p>
+<p><b>Abdomial Pain:</b> <span class="badge badge-default">{{ qs_abdominal_pain }}</span> (0=No, 1=Yes)</p>
+<p><b>Trauma:</b> <span class="badge badge-default">{{ qs_trauma }}</span> (0=No, 1=Yes)</p>
+<p><b>Fever:</b> <span class="badge badge-default">{{ qs_fever }}</span> (0=No, 1=Yes)</p>
+<p><b>Upper Respiratory Tract Infections:</b> <span class="badge badge-default">{{ qs_upper_respiratory_tract_infections }}</span> (0=No, 1=Yes)</p>
+<p><b>Renal Colic:</b> <span class="badge badge-default">{{ qs_renal_colic }}</span> (0=No, 1=Yes)</p>
+<p><b>Giddiness:</b> <span class="badge badge-default">{{ qs_giddiness }}</span> (0=No, 1=Yes)</p>
+<p><b>Low Back Pain:</b> <span class="badge badge-default">{{ qs_low_back_pain }}</span> (0=No, 1=Yes)</p>
+<p><b>Cerebral Palsy:</b> <span class="badge badge-default">{{ qs_cerebral_palsy }}</span> (0=No, 1=Yes)</p>
+<p><b>Asthma:</b> <span class="badge badge-default">{{ qs_asthma }}</span> (0=No, 1=Yes)</p>
+<p><b>Nausea Vomiting:</b> <span class="badge badge-default">{{ qs_nausea_vomiting }}</span> (0=No, 1=Yes)</p>
+<p><b>Diarrhea:</b> <span class="badge badge-default">{{ qs_diarrhea }}</span> (0=No, 1=Yes)</p>
+<p><b>Sob:</b> <span class="badge badge-default">{{ qs_sob }}</span> (0=No, 1=Yes)</p>
+<p><b>Musculoskeletal Pain:</b> <span class="badge badge-default">{{ qs_musculoskeletal_pain }}</span> (0=No, 1=Yes)</p>
+<p><b>Constipation:</b> <span class="badge badge-default">{{ qs_constipation }}</span> (0=No, 1=Yes)</p>
+<p><b>Initial Vital Signs:</b> <span class="badge badge-default">{{ qs_initial_vital_signs }}</span> (0=Normal, 1=Abnormal)</p>
+<p><b>Initial Pain Score:</b> <span class="badge badge-default">{{ qs_initial_pain_score }}</span> (Acture initial pain score = initial pain score * 10)</p>
+<p><b>Initial PAC:</b> <span class="badge badge-default">{{ qs_initial_pac }}</span> (0=P1, 0.5=P2, 1=Yes)</p>
+<p><b>Initial PAC VS3:</b> <span class="badge badge-default">{{ qs_initial_pac_vs3 }}</span> (0=P1&P2, 1=P3)</p>
+<p><b>Return Shift:</b> <span class="badge badge-default">{{ qs_return_shift }}</span> (0=AM, 0.5=PM, 1=Night)</p>
+<p><b>Return Primary Doctor:</b> <span class="badge badge-default">{{ qs_return_primary_doctor }}</span> (0=HO&MO, 0.5=Locum&GP, 1=Registrar)</p>
+<p><b>Return Secondary Doctor:</b> <span class="badge badge-default">{{ qs_return_secondary_doctor }}</span> (0=Have, 1=Does not have)</p>
+<p><b>Persist Pain:</b> <span class="badge badge-default">{{ qs_persist_pain }}</span> (0=No, 1=Yes)</p>
+<p><b>Worsen Symptoms Except Pain:</b> <span class="badge badge-default">{{ qs_worsen_symptoms_except_pain }}</span> (0=No, 1=Yes)</p>
+<p><b>Extend MC:</b> <span class="badge badge-default">{{ qs_extend_mc }}</span> (0=No, 1=Yes)</p>
+<p><b>Return Vital Signs:</b> <span class="badge badge-default">{{ qs_return_vital_signs }}</span> (0=Normal, 1=Abnormal)</p>
+<p><b>Return Pain Score:</b> <span class="badge badge-default">{{ qs_return_pain_score }}</span> (Acture initial pain score = initial pain score * 10)</p>
+<p><b>Return PAC:</b> <span class="badge badge-default">{{ qs_return_pac }}</span> (0=P1, 0.5=P2, 1=Yes)</p>
+<p><b>Return PAC VS3:</b> <span class="badge badge-default">{{ qs_return_pac_vs3 }}</span> (0=P1&P2, 1=P3)</p>
+{% endblock content %}

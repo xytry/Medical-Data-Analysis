@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block head_title %} {{ user.username }} | {{block.super}}{% endblock head_title %}
+
+{% block content %}
+<h1>{{ user.username }}</h1>
+<form class="'form" method="GET" action=".">
+    <input type="text" placeholder="Search.." name = 'q' value="{{ request.GET.q }}">
+    <botton class="btn btn-default" type="submit">Search</botton>
+</form>
+<hr/>
+{# {{ user.patientsinfo_set.all }} #}
+<h2>Unschdeule Return Visits</h2>
+{% if information %}
+    {% for pat in information %}
+    {# {% for pat in user.patientsinfo_set.all %} #}
+        <div class='row'>
+            <div class="col-sm-12">
+                 {# <div class="thumbnail"> #}
+                    <div class="card bg-light mb-3 border-primary mb-3">
+                    <h4><a href="{{ request.path}}?q={{ pat.name }}">{{ pat.name }}</a></h4>
+                    <p> Age: <a href="{{ request.path}}?q={{ pat.age }}"> {{ pat.age }}</a> | Gender: <a href="{{ request.path}}?q={{ pat.gender }}">{{ pat.gender }}</a> </p>
+                {# <div class='col-sm-12' style='border: 1px solid #ccc; border-radius: 5px;margin-bottom: 15px;'><b>{{ pat.name }}</b> | Age: {{ pat.age }} | Gender:{% if pat.gender == 0 %} Male {% endif %} {% if pat.gender == 1 %} Female {% endif %} #}
+                    <ul>
+                        <li style="margin-bottom: 15px;">General Information<br/>
+                            <span>Activities of Daily Living: <a href="{{ request.path}}?q={{ pat.activities_of_daily_living }}">{{ pat.activities_of_daily_living }}</a></span>, <span>Mobility: <a href="{{ request.path}}?q={{ pat.mobility }}">{{ pat.mobility }}</a></span>, <span>Caregiver: <a href="{{ request.path}}?q={{ pat.caregiver }}">{{ pat.caregiver }}</a></span>
+                            <li style="margin-bottom: 15px;">Initial Visit Information<br/>
+                                {# <span style="padding: 2px 4px; margin-right: 4px; background-color:#ccc">Shift: {% if pat.initial_shift == 1 %} AM {% endif %} {% if pat.initial_shift == 2 %} PM {% endif %} {% if pat.initial_shift == 3 %} Night {% endif %}</span> #}
+                                <span>Shift: <a href="{{ request.path}}?q={{ pat.initial_shift }}">{{ pat.initial_shift }}</a></span>
+                                <span>, Primary Doctor: <a href="{{ request.path}}?q={{ pat.initial_primary_doctor }}">{{ pat.initial_primary_doctor }}</a></span>
+                                <span><a href="{{ request.path}}?q={{ pat.initial_secondary_doctor }}">, {{ pat.initial_secondary_doctor }}</a></span>
+                                <span>, Vital Signs: <a href="{{ request.path}}?q={{ pat.initial_vital_signs }}">{{ pat.initial_vital_signs }}</a></span>
+                                <span class="badge badge-default">Pain Score: {{ pat.initial_pain_score }}</span>
+                                <span>PAC: <a href="{{ request.path}}?q={{ pat.initial_pac }}">{{ pat.initial_pac }}</a></span>
+                                <span>{% if pat.initial_admitted == 'Admitted' %}<a href="{{ request.path}}?q={{ pat.initial_admitted }}"> , Admitted</a> {% endif %}</span>
+                                <span>{% if pat.initial_admitted_to_edtu == 'Admitted to EDTU' %}<a href="{{ request.path}}?q={{ pat.initial_admitted_to_edtu }}"> , Admitted to EDTU</a> {% endif %}</span>
+                                <span>{% if pat.initial_discharged == 'Discharged' %}<a href="{{ request.path}}?q={{ pat.initial_discharged }}"> , Discharged</a> {% endif %}</span>
+                                <span>{% if pat.follow_up_initial_visit == 'Follow up Initial Visit' %}<a href="{{ request.path}}?q={{ pat.follow_up_initial_visit }}"> , Follow up Initial Visit</a> {% endif %}</span>
+                                <span>{% if pat.initial_at_own_risk_discharges == 'At Own Risk Discharges' %}<a href="{{ request.path}}?q={{ pat.initial_at_own_risk_discharges }}"> , At Own Risk Discharges</a> {% endif %}</span>
+                            </li>
+                            <li style="margin-bottom: 15px;">Return Visit Information<br/>
+                                {# <span style="padding: 2px 4px; margin-right: 4px; background-color:#ccc">Shift: {% if pat.initial_shift == 1 %} AM {% endif %} {% if pat.initial_shift == 2 %} PM {% endif %} {% if pat.initial_shift == 3 %} Night {% endif %}</span> #}
+                                <span>Shift: <a href="{{ request.path}}?q={{ pat.return_shift }}">{{ pat.return_shift }}</a></span>
+                                <span>, Primary Doctor: <a href="{{ request.path}}?q={{ pat.return_primary_doctor }}">{{ pat.return_primary_doctor }}</a></span>
+                                <span><a href="{{ request.path}}?q={{ pat.return_secondary_doctor }}">, {{ pat.return_secondary_doctor }}</a></span>
+                                <span>, Vital Signs: <a href="{{ request.path}}?q={{ pat.return_vital_signs }}">{{ pat.return_vital_signs }}</a></span>
+                                <span class="badge badge-default">Pain Score: {{ pat.return_pain_score }}</span>
+                                <span>PAC: <a href="{{ request.path}}?q={{ pat.return_pac }}">{{ pat.return_pac }}</a></span>
+                                <span>{% if pat.persist_pain == 'Persist Pain' %}<a href="{{ request.path}}?q={{ pat.persist_pain }}"> , Persist Pain</a> {% endif %}</span>
+                                <span>{% if pat.worsen_symptoms_except_pain == 'Worsen Symptoms Except Pain' %}<a href="{{ request.path}}?q={{ pat.worsen_symptoms_except_pain }}"> , Worsen Symptoms Except Pain</a> {% endif %}</span>
+                                <span>{% if pat.extend_mc == 'Extend MC' %}<a href="{{ request.path}}?q={{ pat.extend_mc }}"> , Extend MC</a> {% endif %}</span>
+                            </li>
+                        </li>
+                        <li style="margin-bottom: 15px;">Diseases Diagnozed<br/>
+                            {% if pat.diabetes_mellitus == 'Diabetes Mellitus' %} <a href="{{ request.path}}?q={{ pat.diabetes_mellitus }}"> Diabetes Mellitus</a> | {% endif %}
+                            {% if pat.diabetes_mellitus_end_organ_damage == 'Diabetes Mellitus End Organ Damage' %}<a href="{{ request.path}}?q={{ pat.diabetes_mellitus_end_organ_damage }}"> Diabetes Mellitus End Organ Damage </a>| {% endif %}
+                            {% if pat.peripheral_vascular_disease == 'Peripheral Vascular Disease' %}<a href="{{ request.path}}?q={{ pat.peripheral_vascular_disease }}"> Peripheral Vascular Disease </a>| {% endif %}
+                            {% if pat.congestive_heart_failure == 'Congestive Heart Failure' %}<a href="{{ request.path}}?q={{ pat.congestive_heart_failure }}"> Congestive Heart Failure </a>| {% endif %}
+                            {% if pat.chronic_obstructive_pulmonary_disease == 'Chronic Obstructive Pulmonary Disease' %}<a href="{{ request.path}}?q={{ pat.chronic_obstructive_pulmonary_disease }}"> Chronic Obstructive Pulmonary Disease </a>| {% endif %}
+                            {% if pat.acute_myocardial_infarction == 'Acute Myocardial Infarction' %}<a href="{{ request.path}}?q={{ pat.acute_myocardial_infarction }}"> Acute Myocardial Infarction </a>| {% endif %}
+                            {% if pat.transient_ischemic_attack == 'Transient Ischemic Attack' %}<a href="{{ request.path}}?q={{ pat.transient_ischemic_attack }}"> Transient Ischemic Attack </a>| {% endif %}
+                            {% if pat.renal_disease == 'Renal Disease' %} <a href="{{ request.path}}?q={{ pat.renal_disease }}"> Renal Disease</a> | {% endif %}
+                            {% if pat.nonmetastatic_cancer == 'Nonmetastatic Cancer' %}<a href="{{ request.path}}?q={{ pat.nonmetastatic_cancer }}">  Nonmetastatic Cancer</a> | {% endif %}
+                            {% if pat.metastatic_cancer == 'Metastatic Cancer' %}<a href="{{ request.path}}?q={{ pat.metastatic_cancer }}"> Metastatic Cancer</a> | {% endif %}
+                            {% if pat.abdominal_pain == 'Abdominal Pain' %}<a href="{{ request.path}}?q={{ pat.abdominal_pain }}"> Abdominal Pain</a> | {% endif %}
+                            {% if pat.trauma == 'Trauma' %}<a href="{{ request.path}}?q={{ pat.trauma }}"> Trauma</a> | {% endif %}
+                            {% if pat.fever == 'Fever' %}<a href="{{ request.path}}?q={{ pat.fever }}"> Fever</a> | {% endif %}
+                            {% if pat.upper_respiratory_tract_infections == 'Upper Respiratory Tract Infections' %}<a href="{{ request.path}}?q={{ pat.upper_respiratory_tract_infections }}"> Upper Respiratory Tract Infections</a> | {% endif %}
+                            {% if pat.renal_colic == 'Renal Colic' %}<a href="{{ request.path}}?q={{ pat.renal_colic }}"> Renal Colic</a> | {% endif %}
+                            {% if pat.giddiness == 'Giddiness' %}<a href="{{ request.path}}?q={{ pat.giddiness }}"> Giddiness</a> | {% endif %}
+                            {% if pat.low_back_pain == 'Low Back Pain' %}<a href="{{ request.path}}?q={{ pat.low_back_pain }}"> Low Back Pain</a> | {% endif %}
+                            {% if pat.cerebral_palsy == 'Cerebral Palsy' %}<a href="{{ request.path}}?q={{ pat.cerebral_palsy }}"> Cerebral Palsy</a> | {% endif %}
+                            {% if pat.asthma == 'Asthma' %}<a href="{{ request.path}}?q={{ pat.asthma }}"> Asthma</a> | {% endif %}
+                            {% if pat.nausea_vomiting == 'Nausea Vomiting' %}<a href="{{ request.path}}?q={{ pat.nausea_vomiting }}"> Nausea Vomiting</a> | {% endif %}
+                            {% if pat.diarrhea == 'Diarrhea' %}<a href="{{ request.path}}?q={{ pat.diarrhea }}"> Diarrhea</a> | {% endif %}
+                            {% if pat.sob == 'Sob' %}<a href="{{ request.path}}?q={{ pat.sob }}"> Sob</a> | {% endif %}
+                            {% if pat.musculoskeletal_pain == 'Musculoskeletal Pain' %}<a href="{{ request.path}}?q={{ pat.musculoskeletal_pain }}"> Musculoskeletal Pain</a> | {% endif %}
+                            {% if pat.constipation == 'Constipation' %}<a href="{{ request.path}}?q={{ pat.constipation }}"> Constipation</a> | {% endif %}
+                        </li>
+                    </ul>
+                    <hr/>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+            {% endif %}
+<h2>Pneumothorax</h2>
+{# {{ user.item_set.all }} #}
+{% for ite in user.item_set.all %}
+    <li><b>{{ ite.name }}</b> | Age: {{ ite.age }} | Gender: {{ ite.gender }} | Ethnicity: {{ ite.ethnicity }}</li>
+{% endfor %}
+{% endblock %}

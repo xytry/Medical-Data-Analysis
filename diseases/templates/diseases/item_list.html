@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block head_title %}Diseases | {{block.super}}{% endblock head_title %}
+
+{% block content %}
+<h1>Diseases<small><a href='{% url "diseases:create" %}'>Add</a></small></h1>
+
+<ul>
+    {% for obj in object_list %}
+    {#  <li><a href='{{ obj.get_absolute_url }}'>{{ obj }}</a><br/>  #}
+    {# <li><a href='{% url "patients-detail" slug=obj.slug %}'>{{ obj }}</a><br/>  #}
+    {# <li><a href='{% url "patients:detail" slug=obj.slug %}'>{{ obj }}</a><br/>  #}
+        {#  <a href="/patients/{{ obj.slug }}/">{{ obj }}</a><br/>  #}
+        <li><a href='{{ obj.get_absolute_url }}'>{{ obj.name }}</a><br/>
+        {{ obj.age }} {{ obj.gender }} {{ obj.Ethnicity }} {{ obj.smoker }} {{ obj.fever }} {{obj.public}} {{obj.timestamp}} {{obj.updated}}
+        </li>
+        {% empty %}
+        <li><a href='{% url "diseases:create" %}'>Add New Disease</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

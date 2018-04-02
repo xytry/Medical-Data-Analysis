@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block head_title %}Diseases | {{block.super}}{% endblock head_title %}
+
+{% block content %}
+<h1>{{ object.name }}</h1>
+
+<ul>
+
+        <li> {{ object.age }} {{ object.gender }} {{ object.Ethnicity }} {{ object.smoker }} {{ object.fever }} {{object.public}} {{object.timestamp}} {{object.updated}}</li>
+
+</ul>
+{% endblock %}
